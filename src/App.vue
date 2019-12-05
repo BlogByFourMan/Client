@@ -9,8 +9,15 @@
     text-color="#fff"
     active-text-color="#ffd04b">
     <h1 id="title">Simple Blog</h1>
-    <el-menu-item index="1">登陆</el-menu-item>
-    <el-menu-item index="2">注册</el-menu-item>
+    <router-link to='/'>
+      <el-menu-item index="2">主页</el-menu-item>
+    </router-link>
+    <router-link to='/join' style='float:right'>
+      <el-menu-item index="2">注册</el-menu-item>
+    </router-link>
+    <router-link to='/login' style='float:right'>
+      <el-menu-item index="1">登陆</el-menu-item>
+    </router-link>
   </el-menu>
     <!--<img src="./assets/logo.png">-->
     <router-view/>
@@ -36,9 +43,6 @@ body {
   margin-inline-end: 0px;
   color: #FFF;
   width: 200px;
-}
-.el-menu--horizontal>.el-menu-item {
-    float: right;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
