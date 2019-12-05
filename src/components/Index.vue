@@ -4,7 +4,13 @@
         <li v-for="item in courseList" :key="item">
           <el-container >
             <el-main>
-              <router-link :to="{'path':'/article/details/'+item.id}">{{item.name}}</router-link>
+              <div class="title">
+                <router-link :to="{'path':'/article/details/'+item.id}">{{item.title}}</router-link>
+              </div>          
+              <div class="extra">
+                <div class="author">{{item.author}}</div>
+                <div class="date">{{item.date}}</div>
+              </div>
             </el-main>
           </el-container>
         </li>
@@ -34,11 +40,15 @@ export default {
       var that = this
       that.courseList.push({
           id: 1,
-          name: "blog1"
+          title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
+          date: "2019-12-05",
+          author: "董旭阳TonyDong"
           })  
       that.courseList.push({
           id: 2,
-          name: "blog2"
+          title: "shell脚本：备份数据库、代码上线",
+          date: "2014-01-12",
+          author: "Asnfy"
           })   
     //   var that = this
     //   this.$axios.request({
@@ -64,7 +74,7 @@ export default {
 }
 .el-container {
   height: 100px;
-  width: 700px;
+  width: 800px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   margin: 5px auto;
 }
@@ -74,6 +84,7 @@ ul {
 }
 li {
   list-style-type :none;
+  position: relative;
 }
 a {
   float: left;
@@ -82,5 +93,19 @@ a {
 .router-link-active {
   
   text-decoration: none;
+}
+.title {
+  height: 30px;
+}
+.extra {
+  margin-top: 12px;
+  bottom: 10px;
+  font-size: 12px;
+}
+.author {
+  float: left;
+}
+.date {
+  float: right;
 }
 </style>
