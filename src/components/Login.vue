@@ -13,7 +13,6 @@
     <el-button type="primary">登录</el-button>
   </div>
   </div>
-  
 </template>
 
 <script>

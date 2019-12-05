@@ -21,16 +21,16 @@ export default {
   name: 'index',
   data () {
     return {
-      msg:'',
-      courseList:[]
+      msg: '',
+      courseList: []
     }
   },
-   mounted:function () {
+  mounted: function() {
       //当组件一加载的时候就应该去数据库去获取数据
       this.initCourses()
   },
   methods:{
-    initCourses:function () {
+    initCourses: function () {
       var that = this
       that.courseList.push({
           id: 1,
