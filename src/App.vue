@@ -9,7 +9,7 @@
     text-color="#fff"
     active-text-color="#ffd04b">
     <h1 id="title">Simple Blog</h1>
-    <router-link to='/'>
+    <router-link to='/' style='float:left'>
       <el-menu-item index="2">主页</el-menu-item>
     </router-link>
     <router-link to='/join' style='float:right'>
