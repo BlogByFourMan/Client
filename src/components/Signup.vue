@@ -1,85 +1,25 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div>
+      <el-input v-model="userID" placeholder="用户名(6~18位英文字母、数字)" class='inputClass'></el-input>
+   </div>
+   <br>
+   <div>
+      <el-input v-model="password" placeholder="密码" class='inputClass' type='password'></el-input>
+   </div>
+   <br>
+   <div>
+      <el-input v-model="password" placeholder="再次输入密码确认" class='inputClass' type='password'></el-input>
+   </div>
+   <br>
+   <div>
+      <el-input v-model="mail" placeholder="邮箱" class='inputClass'></el-input>
+   </div>
+   <br>
+   <div>
+    <el-button type="primary">登录</el-button>
+  </div>
   </div>
 </template>
 
@@ -88,7 +28,10 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Sign up',
+      userID: '',
+      password: ''
+
     }
   }
 }
@@ -96,6 +39,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body{
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
 h1, h2 {
   font-weight: normal;
 }
@@ -109,5 +55,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.inputClass{
+  width:300px
 }
 </style>
