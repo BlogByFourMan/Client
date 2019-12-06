@@ -9,20 +9,12 @@
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b">
-    <router-link to='/' style='float:left'>
-    <h1 id="title">Simple Blog</h1>
-    </router-link>
-    <router-link to='/' style='float:left'>
-      <el-menu-item index="3" >主页</el-menu-item>
-    </router-link>
+    <h1 id="SimpleBlog">Simple Blog</h1>
+    <el-menu-item index="/" >主页</el-menu-item>
     <el-menu-item index="/user" style='float:right' v-if="this.$store.state.username">{{ this.$store.state.username }}</el-menu-item>
     <div v-else="">
-      <router-link to='/join' style='float:right'>
-        <el-menu-item index="2">注册</el-menu-item>
-      </router-link>
-      <router-link to='/login' style='float:right'>
-        <el-menu-item index="1">登陆</el-menu-item>
-      </router-link>
+      <el-menu-item class = "log" index="/join" style='float:right'>注册</el-menu-item>
+      <el-menu-item class = "log" index="/login" style='float:right'>登陆</el-menu-item>
     </div>  
   </el-menu>
     <!--<img src="./assets/logo.png">-->
@@ -40,7 +32,12 @@ export default {
 body {
   margin: 0;
 }
-#title {
+.log {
+  height: 60px;
+}
+#SimpleBlog {
+  line-height: 1.2;
+  height: 36.8px;
   float: left;
   font-size: 30px;
   margin-block-start: 10px;

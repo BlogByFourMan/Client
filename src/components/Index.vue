@@ -1,3 +1,4 @@
+
 <template>
   <div class="">
       <ul>
@@ -6,7 +7,7 @@
             <el-main>
               <div class="title">
                 <router-link :to="{'path':'/article/details/'+item.id}">{{item.title}}</router-link>
-              </div>          
+              </div>    
               <div class="extra">
                 <div class="author">{{item.author}}</div>
                 <div class="date">{{item.date}}</div>
@@ -31,18 +32,17 @@ export default {
       articlesList: []
     }
   },
-  mounted: function() {
-      //当组件一加载的时候就应该去数据库去获取数据
+  mounted: function () {
       this.initArticles()
   },
   methods:{
     initArticles: function () {
-      var that = this
-      that.articlesList.push({
-          id: 1,
-          title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
-          date: "2019-12-05",
-          author: "董旭阳TonyDong"
+        var that = this
+        that.articlesList.push({
+            id: 1,
+            title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
+            date: "2019-12-05",
+            author: "董旭阳TonyDong"
           })  
       that.articlesList.push({
           id: 2,

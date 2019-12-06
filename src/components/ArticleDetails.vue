@@ -5,10 +5,9 @@
     </div>
     <div class = "extra">
       <div class="date">{{article.date}}</div>
-      <div class="author">{{article.author}}</div>
+      <div class="author">{{article.username}}</div>
     </div>
-    <div class = "content">
-      {{ article.content }}
+    <div class = "content" v-html="article.content">
       <br>
       <br>
       <br>
@@ -19,7 +18,7 @@
         <el-button type="primary" size="mini" @click="DoComment()">评论</el-button>
       </div>
       <ul>
-        <li v-for="item in comments" :key="item">      
+        <li v-for="item in comments" :key="item">    
           <div class="header">
             <div class="author">{{item.user}}</div>
             <div class="date">{{item.date}}</div>
@@ -33,16 +32,10 @@
 
 <script>
 export default {
-  name: 'article details',
+  name: 'articleDetails',
   data () {
     return {
-      article: {
-        id: this.$route.params.id,
-        title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
-        author: "董旭阳TonyDong",
-        date: "2019-12-05",
-        content: "锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。"
-      },
+      article: {},
       comments: [],
       toAdd: ""
     }
@@ -54,37 +47,22 @@ export default {
   methods:{
     init: function () {
       var that = this
-      that.comments.push({
-        user: "zsj.python之路",
-        article_id: this.$route.params.id,
-        date: "2019-12-2",
-        content: "优秀"
-      })
-      that.comments.push({
-        user: "zsj.python之路",
-        article_id: this.$route.params.id,
-        date: "2019-12-2",
-        content: "优秀"
-      })
       var nid = this.$route.params.id  //获取id
       var that = this
       this.$axios.request({
-        url:'https://localhost/article/' + nid,
+        url:'http://localhost:8081/article/1',
         methods:'GET',
-        responseType:'json'
       }).then(function (response) {
-        console.log(response)
-        that.article = response.data;
-      })
+        that.article = response.data.ok;
+      }) 
 
       this.$axios.request({
-        url:'https://localhost/article/' + nid + '/comments',
+        url:'http://localhost:8081/article/' + nid + '/comments',
         methods:'GET',
-        responseType:'json'
       }).then(function (response) {
-        console.log(response.data)
-        that.comments = response.data;
-      })
+        // console.log(response)
+        that.comments = response.data.ok;
+      })  
     },
     DoComment: function() {
       if (this.$store.state.username) {
@@ -94,24 +72,27 @@ export default {
             confirmButtonText: '确定',
           });
         }
-        that.comments.push({
-          user: this.$store.state.username,
-          article_id: this.$route.params.id,
-          date: "2019-12-2",
-          content: this.toAdd
-        })
-        this.$axios.request({
-          url:'https://localhost/article/' + nid + '/comment',
-          methods:'POST',
-          data: {
-            username: 'this.$store.state.username',
-            content: 'this.toAdd'
-          },
-          responseType:'json'
-        }).then(function (response) {
-          console.log(response.data)
-          that.comments.push(response.data)
-        })
+        else {
+          that.comments.push({
+            user: this.$store.state.username,
+            article_id: this.$route.params.id,
+            date: "2019-12-2",
+            content: this.toAdd
+          })
+          this.$axios.request({
+            url:'https://localhost/article/' + nid + '/comment',
+            methods:'POST',
+            data: {
+              username: 'this.$store.state.username',
+              content: 'this.toAdd'
+            },
+            responseType:'json'
+          }).then(function (response) {
+            console.log(response.data)
+            that.comments.push(response.data)
+          })
+        }
+        
       }
       else {
         this.$router.push('/login')
@@ -189,7 +170,7 @@ export default {
   border-top: 1px #DCDFE6;
 }
 .addComment {
-  height: 70px;
+  height: 90px;
 }
 .el-button {
   float: right;
