@@ -10,7 +10,7 @@
    </div>
    <br>
    <div>
-    <el-button type="primary">登录</el-button>
+    <el-button type="primary" @click="cilckLogin()">登录</el-button>
   </div>
   </div>
 </template>
@@ -22,8 +22,37 @@ export default {
     return {
       msg: 'Sign in to Single Blog',
       userID: '',
-      password: ''
-
+      password: '',
+      dir:"http://localhost:8001/login"
+    }
+  },
+  methods:{
+    cilckLogin: function(){
+     var that = this
+     this.$axios.request({
+       url: dir,
+       method: 'POST',
+       data:{
+         username: this.userID,
+         password: this.password
+       },
+       responseType:'json'
+     }).then(function(response){
+       console.log(response.data)
+       //传送数据到store.js的saveToken，并回到主页
+       if(response.data.token){
+         //返回的token是true
+         that.$store.commit('saveToken', {
+           username: that.userID,
+           token: response.data.token
+         })
+       }
+       else{
+        //返回的token是false
+        alert('用户名不存在或密码错误！')
+       }
+       that.$router.push('/')
+     })
     }
   }
 }
