@@ -1,19 +1,20 @@
 <template>
   <div id="app">
   <el-menu
-    :default-active="activeIndex2"
+    :router="true"
+    :default-active="this.$route.path"
     class="header"
     mode="horizontal"
     @select="handleSelect"
     background-color="#545c64"
     text-color="#fff"
-    active-text-color="#ffd04b">
+    >
     <h1 id="title">Simple Blog</h1>
     <router-link to='/' style='float:left'>
-      <el-menu-item index="2">主页</el-menu-item>
+      <el-menu-item index="3" >主页</el-menu-item>
     </router-link>
     <router-link to='/join' style='float:right'>
-      <el-menu-item index="2">注册</el-menu-item>
+      <el-menu-item index="2" route="/join">注册</el-menu-item>
     </router-link>
     <router-link to='/login' style='float:right'>
       <el-menu-item index="1">登陆</el-menu-item>

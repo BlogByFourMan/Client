@@ -18,7 +18,7 @@
    </div>
    <br>
    <div>
-    <el-button type="primary">登录</el-button>
+    <el-button type="primary">注册</el-button>
   </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="">
       <ul>
-        <li v-for="item in courseList" :key="item">
+        <li v-for="item in articlesList" :key="item">
           <el-container >
             <el-main>
               <div class="title">
@@ -28,23 +28,23 @@ export default {
   data () {
     return {
       msg: '',
-      courseList: []
+      articlesList: []
     }
   },
   mounted: function() {
       //当组件一加载的时候就应该去数据库去获取数据
-      this.initCourses()
+      this.initArticles()
   },
   methods:{
-    initCourses: function () {
+    initArticles: function () {
       var that = this
-      that.courseList.push({
+      that.articlesList.push({
           id: 1,
           title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
           date: "2019-12-05",
           author: "董旭阳TonyDong"
           })  
-      that.courseList.push({
+      that.articlesList.push({
           id: 2,
           title: "shell脚本：备份数据库、代码上线",
           date: "2014-01-12",
@@ -56,7 +56,7 @@ export default {
     //       method:"GET"
     //   }).then(function (response) {
     //     console.log(response);
-    //     that.courseList = response.data.courseList
+    //     that.articlesList = response.data.courseList
     //   })
     }
   }
