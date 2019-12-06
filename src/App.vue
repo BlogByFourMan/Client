@@ -15,12 +15,15 @@
     <router-link to='/' style='float:left'>
       <el-menu-item index="3" >主页</el-menu-item>
     </router-link>
-    <router-link to='/join' style='float:right'>
-      <el-menu-item index="2" route="/join">注册</el-menu-item>
-    </router-link>
-    <router-link to='/login' style='float:right'>
-      <el-menu-item index="1">登陆</el-menu-item>
-    </router-link>
+    <el-menu-item style='float:right' v-if="this.$store.state.username">{{ this.$store.state.username }}</el-menu-item>
+    <div v-else="">
+      <router-link to='/join' style='float:right'>
+        <el-menu-item index="2">注册</el-menu-item>
+      </router-link>
+      <router-link to='/login' style='float:right'>
+        <el-menu-item index="1">登陆</el-menu-item>
+      </router-link>
+    </div>  
   </el-menu>
     <!--<img src="./assets/logo.png">-->
     <router-view/>
