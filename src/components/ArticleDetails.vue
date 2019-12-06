@@ -70,7 +70,7 @@ export default {
           this.$axios.request({
             url:'http://localhost:8081/article/' + nid + '/comment',
             methods:'POST',
-            data: that.$qs.stringify({
+            data: JSON.stringify({
               username: 'this.$store.state.username',
               content: 'this.toAdd'
             }),

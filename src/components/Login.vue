@@ -28,13 +28,13 @@ export default {
   methods:{
     cilckLogin: function(){
      var that = this
+     var params = new URLSearchParams();
+     params.append('username', this.userID);
+     params.append('password', this.password);
      this.$axios.request({
        url: 'http://localhost:8081/user/login',
        method: 'POST',
-       data:that.$qs.stringify({
-         username: 'this.userID',
-         password: 'this.password'
-       }),
+       data: JSON.stringify(params),
        responseType:'json'
      }).then(function(response){
        console.log(response.data)
