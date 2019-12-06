@@ -16,7 +16,7 @@
     <div class = "comments">
       <div class="addComment">
         <el-input v-model="toAdd" placeholder="添加评论..." class='inputClass'></el-input>
-        <el-button type="primary" size="mini">评论</el-button>
+        <el-button type="primary" size="mini" @click="DoComment()">评论</el-button>
       </div>
       <ul>
         <li v-for="item in comments" :key="item">      
@@ -82,11 +82,41 @@ export default {
         methods:'GET',
         responseType:'json'
       }).then(function (response) {
-        console.log(response)
+        console.log(response.data)
         that.comments = response.data;
       })
+    },
+    DoComment: function() {
+      if (this.$store.state.username) {
+        var that = this
+        if (!this.toAdd) {
+          this.$alert('请填写评论内容', '显示', {
+            confirmButtonText: '确定',
+          });
+        }
+        that.comments.push({
+          user: this.$store.state.username,
+          article_id: this.$route.params.id,
+          date: "2019-12-2",
+          content: this.toAdd
+        })
+        this.$axios.request({
+          url:'https://localhost/article/' + nid + '/comment',
+          methods:'POST',
+          data: {
+            username: 'this.$store.state.username',
+            content: 'this.toAdd'
+          },
+          responseType:'json'
+        }).then(function (response) {
+          console.log(response.data)
+          that.comments.push(response.data)
+        })
+      }
+      else {
+        this.$router.push('/login')
+      }
     }
-
   }
 }
 </script>
@@ -151,6 +181,7 @@ export default {
   color: #606266
 }
 .comments li {
+  list-style-type :none;
   padding: 8px;
   border-top: 1px dashed #DCDFE6;
 }
