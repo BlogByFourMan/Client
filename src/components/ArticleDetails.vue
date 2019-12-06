@@ -14,7 +14,10 @@
       <br>
     </div>
     <div class = "comments">
-      <el-input v-model="userID" placeholder="添加评论..." class='inputClass'></el-input>
+      <div class="addComment">
+        <el-input v-model="toAdd" placeholder="添加评论..." class='inputClass'></el-input>
+        <el-button type="primary" size="mini">评论</el-button>
+      </div>
       <ul>
         <li v-for="item in comments" :key="item">      
           <div class="header">
@@ -40,7 +43,8 @@ export default {
         date: "2019-12-05",
         content: "锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。\n锁（Locking）是数据库在并发访问时保证数据一致性和完整性的主要机制。在 MySQL 中，不同存储引擎使用不同的加锁方式；我们以 InnoDB 存储引擎为例介绍 MySQL 中的锁机制，其他存储引擎中的锁相对简单一些。"
       },
-      comments: []
+      comments: [],
+      toAdd: ""
     }
   },
   mounted:function () {
@@ -62,19 +66,27 @@ export default {
         date: "2019-12-2",
         content: "优秀"
       })
-    //   var nid = this.$route.params.id  //获取id
-    //   var that = this
-    //   var url = '' + nid + '.json'
-    //   this.$axios.request({
-    //     url:url,
-    //     methods:'GET',
-    //     responseType:'json'
-    //   }).then(function (response) {
-    //     console.log(response)
-    //     that.title = response.data.title;
-    //     that.summary = response.data.summary
-    //   })
-      }
+      var nid = this.$route.params.id  //获取id
+      var that = this
+      this.$axios.request({
+        url:'https://localhost/article/' + nid,
+        methods:'GET',
+        responseType:'json'
+      }).then(function (response) {
+        console.log(response)
+        that.article = response.data;
+      })
+
+      this.$axios.request({
+        url:'https://localhost/article/' + nid + '/comments',
+        methods:'GET',
+        responseType:'json'
+      }).then(function (response) {
+        console.log(response)
+        that.comments = response.data;
+      })
+    }
+
   }
 }
 </script>
@@ -145,5 +157,11 @@ export default {
 .comments li:first-child {
   border-top: 1px #DCDFE6;
 }
-
+.addComment {
+  height: 70px;
+}
+.el-button {
+  float: right;
+  margin-top: 10px;
+}
 </style>

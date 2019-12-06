@@ -50,14 +50,14 @@ export default {
           date: "2014-01-12",
           author: "Asnfy"
           })   
-    //   var that = this
-    //   this.$axios.request({
-    //       url:'https://localhost/article/{id}',
-    //       method:"GET"
-    //   }).then(function (response) {
-    //     console.log(response);
-    //     that.articlesList = response.data.courseList
-    //   })
+      this.$axios.request({
+          url:'https://localhost/articles?page=1',
+          method:"GET",
+          responseType:'json'
+      }).then(function (response) {
+        console.log(response);
+        that.articlesList = response.data
+      })
     }
   }
 
