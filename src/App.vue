@@ -15,7 +15,7 @@
     <router-link to='/' style='float:left'>
       <el-menu-item index="3" >主页</el-menu-item>
     </router-link>
-    <el-menu-item style='float:right' v-if="this.$store.state.username">{{ this.$store.state.username }}</el-menu-item>
+    <el-menu-item index="/user" style='float:right' v-if="this.$store.state.username">{{ this.$store.state.username }}</el-menu-item>
     <div v-else="">
       <router-link to='/join' style='float:right'>
         <el-menu-item index="2">注册</el-menu-item>
