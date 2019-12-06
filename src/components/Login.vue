@@ -44,11 +44,11 @@ export default {
            username: that.userID,
            token: response.data.token
          })
+         that.$router.push('/')
        }
        else{
         alert(response.data.error)
        }
-       that.$router.push('/')
      })
     }
   }
