@@ -8,8 +8,10 @@
     @select="handleSelect"
     background-color="#545c64"
     text-color="#fff"
-    >
+    active-text-color="#ffd04b">
+    <router-link to='/' style='float:left'>
     <h1 id="title">Simple Blog</h1>
+    </router-link>
     <router-link to='/' style='float:left'>
       <el-menu-item index="3" >主页</el-menu-item>
     </router-link>

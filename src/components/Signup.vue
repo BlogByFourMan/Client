@@ -2,11 +2,11 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
   <div>
-      <el-input v-model="userID" placeholder="用户名(6~18位英文字母、数字)" class='inputClass'></el-input>
+      <el-input v-model="userID" placeholder="用户名(6~18位英文字母、数字、下划线)" class='inputClass'></el-input>
    </div>
    <br>
    <div>
-      <el-input v-model="password" placeholder="密码" class='inputClass' type='password'></el-input>
+      <el-input v-model="password" placeholder="密码(6~18位数字、大小写字母)" class='inputClass' type='password'></el-input>
    </div>
    <br>
    <div>
