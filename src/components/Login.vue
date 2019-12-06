@@ -23,33 +23,30 @@ export default {
       msg: 'Sign in to Single Blog',
       userID: '',
       password: '',
-      dir:"http://localhost:8001/login"
     }
   },
   methods:{
     cilckLogin: function(){
      var that = this
      this.$axios.request({
-       url: dir,
+       url: 'http://localhost:8081/user/login',
        method: 'POST',
-       data:{
-         username: this.userID,
-         password: this.password
-       },
+       data:that.$qs.stringify({
+         username: 'this.userID',
+         password: 'this.password'
+       }),
        responseType:'json'
      }).then(function(response){
        console.log(response.data)
        //传送数据到store.js的saveToken，并回到主页
-       if(response.data.token){
-         //返回的token是true
+       if(!response.data.error) {
          that.$store.commit('saveToken', {
            username: that.userID,
            token: response.data.token
          })
        }
        else{
-        //返回的token是false
-        alert('用户名不存在或密码错误！')
+        alert(response.data.error)
        }
        that.$router.push('/')
      })

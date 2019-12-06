@@ -9,7 +9,7 @@
                 <router-link :to="{'path':'/article/details/'+item.id}">{{item.title}}</router-link>
               </div>    
               <div class="extra">
-                <div class="author">{{item.author}}</div>
+                <div class="author">{{item.username}}</div>
                 <div class="date">{{item.date}}</div>
               </div>
             </el-main>
@@ -37,26 +37,14 @@ export default {
   },
   methods:{
     initArticles: function () {
-        var that = this
-        that.articlesList.push({
-            id: 1,
-            title: "通过各种简单案例，让你彻底搞懂 MySQL 中的锁机制与 MVCC",
-            date: "2019-12-05",
-            author: "董旭阳TonyDong"
-          })  
-      that.articlesList.push({
-          id: 2,
-          title: "shell脚本：备份数据库、代码上线",
-          date: "2014-01-12",
-          author: "Asnfy"
-          })   
-      this.$axios.request({
-          url:'https://localhost/articles?page=1',
-          method:"GET",
-          responseType:'json'
-      }).then(function (response) {
-        console.log(response);
-        that.articlesList = response.data
+        var that = this 
+        this.$axios.request({
+            url:'http://localhost:8081/articles?page=1',
+            method:"GET",
+            responseType:'json'
+        }).then(function (response) {
+          console.log(response.data);
+          that.articlesList = response.data.ok
       })
     }
   }

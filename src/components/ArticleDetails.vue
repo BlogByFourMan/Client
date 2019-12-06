@@ -18,7 +18,7 @@
         <el-button type="primary" size="mini" @click="DoComment()">评论</el-button>
       </div>
       <ul>
-        <li v-for="item in comments" :key="item">    
+        <li v-for="item in article.comments" :key="item">    
           <div class="header">
             <div class="author">{{item.user}}</div>
             <div class="date">{{item.date}}</div>
@@ -50,21 +50,15 @@ export default {
       var nid = this.$route.params.id  //获取id
       var that = this
       this.$axios.request({
-        url:'http://localhost:8081/article/1',
+        url:'http://localhost:8081/article/' + nid,
         methods:'GET',
       }).then(function (response) {
+        console.log(response.data);
         that.article = response.data.ok;
       }) 
-
-      this.$axios.request({
-        url:'http://localhost:8081/article/' + nid + '/comments',
-        methods:'GET',
-      }).then(function (response) {
-        // console.log(response)
-        that.comments = response.data.ok;
-      })  
     },
     DoComment: function() {
+      var nid = this.$route.params.id
       if (this.$store.state.username) {
         var that = this
         if (!this.toAdd) {
@@ -73,21 +67,21 @@ export default {
           });
         }
         else {
-          that.comments.push({
-            user: this.$store.state.username,
-            article_id: this.$route.params.id,
-            date: "2019-12-2",
-            content: this.toAdd
-          })
           this.$axios.request({
-            url:'https://localhost/article/' + nid + '/comment',
+            url:'http://localhost:8081/article/' + nid + '/comment',
             methods:'POST',
-            data: {
+            data: that.$qs.stringify({
               username: 'this.$store.state.username',
               content: 'this.toAdd'
-            },
+            }),
             responseType:'json'
           }).then(function (response) {
+            that.article.comments.push({
+              user: this.$store.state.username,
+              article_id: this.$route.params.id,
+              date: "2019-12-2",
+              content: this.toAdd
+            })
             console.log(response.data)
             that.comments.push(response.data)
           })

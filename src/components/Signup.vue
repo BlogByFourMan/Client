@@ -41,32 +41,29 @@ export default {
       pswdinfo1:'',
       pswdinfo2:'',
       emailinfo:'',
-      dir: 'http:localhost:8001/join'
     }
   },
   methods:{
     clickJoin: function(){
-      alert('注册按钮被点击')
       var that = this
       this.$axios.request({
-       url: dir,
+       url: 'http://localhost:8081/user/register',
        method: 'POST',
-       data:{
-         username: this.userID,
-         password: this.password
-       },
+       data:that.$qs.stringify({
+         username: 'this.userID',
+         password: 'this.password'
+       }),
        responseType:'json'
      }).then(function(response){
        console.log(response.data)
-       if(response.data.token){
+       if(!response.data.error) {
          that.$store.commit('saveToken', {
            username: that.userID,
            token: response.data.token
-         })
+         })    
        }
-       //传送数据到store.js的saveToken，并回到主页
        else{
-         alert('用户名已存在')
+         alert(response.data.error) 
        }
        that.$router.push('/')
        })
