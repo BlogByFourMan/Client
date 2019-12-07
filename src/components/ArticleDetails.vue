@@ -82,6 +82,7 @@ export default {
           }).then(function (response) {
             console.log(response.data)
             if (!response.data.error) {
+              that.article.comments = []
               that.article.comments.push({
                 user: response.data.ok.user,
                 article_id: response.data.ok.article_id,
