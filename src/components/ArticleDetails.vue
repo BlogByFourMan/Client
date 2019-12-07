@@ -67,21 +67,28 @@ export default {
         } else {
           this.$axios.request({
             url: 'http://localhost:8081/article/' + nid + '/comment',
-            methods: 'POST',
+            method: 'Post',
             data: JSON.stringify({
-              username: this.$store.state.username,
-              content: this.toAdd
+              User: that.$store.state.username,
+              Article_id: parseInt(nid),
+              Token: that.$store.state.token,
+              Date: '2019-12-6',
+              Content: this.toAdd
             }),
             responseType: 'json'
           }).then(function (response) {
-            that.article.comments.push({
-              user: this.$store.state.username,
-              article_id: this.$route.params.id,
-              date: '2019-12-2',
-              content: this.toAdd
-            })
             console.log(response.data)
             that.comments.push(response.data)
+            if (!response.data.error) {
+              that.article.comments.push({
+                user: that.$store.state.username,
+                article_id: that.$route.params.id,
+                date: '2019-12-2',
+                content: that.toAdd
+              })
+            } else {
+              alert(response.data.error)
+            }
           })
         }
       } else {

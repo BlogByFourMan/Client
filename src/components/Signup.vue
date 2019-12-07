@@ -48,7 +48,7 @@ export default {
       var that = this
       this.$axios.request({
         url: 'http://localhost:8081/user/register',
-        method: 'POST',
+        method: 'Post',
         data: JSON.stringify({
           username: 'this.userID',
           password: 'this.password'
