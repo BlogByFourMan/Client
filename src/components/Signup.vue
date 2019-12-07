@@ -50,8 +50,8 @@ export default {
         url: 'http://localhost:8081/user/register',
         method: 'Post',
         data: JSON.stringify({
-          username: 'this.userID',
-          password: 'this.password'
+          Username: this.userID,
+          Password: this.password
         }),
         responseType: 'json'
       }).then(function (response) {
