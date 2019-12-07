@@ -22,34 +22,33 @@ export default {
     return {
       msg: 'Sign in to Single Blog',
       userID: '',
-      password: '',
+      password: ''
     }
   },
-  methods:{
-    cilckLogin: function(){
-     var that = this
-     var params = new URLSearchParams();
-     params.append('username', this.userID);
-     params.append('password', this.password);
-     this.$axios.request({
-       url: 'http://localhost:8081/user/login',
-       method: 'POST',
-       data: JSON.stringify(params),
-       responseType:'json'
-     }).then(function(response){
-       console.log(response.data)
-       //传送数据到store.js的saveToken，并回到主页
-       if(!response.data.error) {
-         that.$store.commit('saveToken', {
-           username: that.userID,
-           token: response.data.token
-         })
-         that.$router.push('/')
-       }
-       else{
-        alert(response.data.error)
-       }
-     })
+  methods: {
+    cilckLogin: function () {
+      var that = this
+      var params = new URLSearchParams()
+      params.append('username', this.userID)
+      params.append('password', this.password)
+      this.$axios.request({
+        url: 'http://localhost:8081/user/login',
+        method: 'POST',
+        data: JSON.stringify(params),
+        responseType: 'json'
+      }).then(function (response) {
+        console.log(response.data)
+        // 传送数据到store.js的saveToken，并回到主页
+        if (!response.data.error) {
+          that.$store.commit('saveToken', {
+            username: that.userID,
+            token: response.data.token
+          })
+          that.$router.push('/')
+        } else {
+          alert(response.data.error)
+        }
+      })
     }
   }
 }

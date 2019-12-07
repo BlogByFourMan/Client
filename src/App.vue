@@ -15,7 +15,7 @@
     <div v-else="">
       <el-menu-item class = "log" index="/join" style='float:right'>注册</el-menu-item>
       <el-menu-item class = "log" index="/login" style='float:right'>登陆</el-menu-item>
-    </div>  
+    </div>
   </el-menu>
     <!--<img src="./assets/logo.png">-->
     <router-view/>

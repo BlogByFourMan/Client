@@ -7,7 +7,7 @@
             <el-main>
               <div class="title">
                 <router-link :to="{'path':'/article/details/'+item.id}">{{item.title}}</router-link>
-              </div>    
+              </div>
               <div class="extra">
                 <div class="author">{{item.username}}</div>
                 <div class="date">{{item.date}}</div>
@@ -33,18 +33,18 @@ export default {
     }
   },
   mounted: function () {
-      this.initArticles()
+    this.initArticles()
   },
-  methods:{
+  methods: {
     initArticles: function () {
-        var that = this 
-        this.$axios.request({
-            url:'http://localhost:8081/articles?page=1',
-            method:"GET",
-            responseType:'json'
-        }).then(function (response) {
-          console.log(response.data);
-          that.articlesList = response.data.ok
+      var that = this
+      this.$axios.request({
+        url: 'http://localhost:8081/articles?page=1',
+        method: 'GET',
+        responseType: 'json'
+      }).then(function (response) {
+        console.log(response.data)
+        that.articlesList = response.data.ok
       })
     }
   }
@@ -79,7 +79,6 @@ a {
   text-decoration: none;
 }
 .router-link-active {
-  
   text-decoration: none;
 }
 .title {

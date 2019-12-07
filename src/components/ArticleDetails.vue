@@ -18,7 +18,7 @@
         <el-button type="primary" size="mini" @click="DoComment()">评论</el-button>
       </div>
       <ul>
-        <li v-for="item in article.comments" :key="item">    
+        <li v-for="item in article.comments" :key="item">
           <div class="header">
             <div class="author">{{item.user}}</div>
             <div class="date">{{item.date}}</div>
@@ -37,58 +37,54 @@ export default {
     return {
       article: {},
       comments: [],
-      toAdd: ""
+      toAdd: ''
     }
   },
-  mounted:function () {
-    //当组件一加载就执行的函数
+  mounted: function () {
+    // 当组件一加载就执行的函数
     this.init()
   },
-  methods:{
+  methods: {
     init: function () {
       var that = this
-      var nid = this.$route.params.id  //获取id
-      var that = this
+      var nid = this.$route.params.id// 获取id
       this.$axios.request({
-        url:'http://localhost:8081/article/' + nid,
-        methods:'GET',
+        url: 'http://localhost:8081/article/' + nid,
+        methods: 'GET'
       }).then(function (response) {
-        console.log(response.data);
-        that.article = response.data.ok;
-      }) 
+        console.log(response.data)
+        that.article = response.data.ok
+      })
     },
-    DoComment: function() {
+    DoComment: function () {
       var nid = this.$route.params.id
       if (this.$store.state.username) {
         var that = this
         if (!this.toAdd) {
           this.$alert('请填写评论内容', '显示', {
-            confirmButtonText: '确定',
-          });
-        }
-        else {
+            confirmButtonText: '确定'
+          })
+        } else {
           this.$axios.request({
-            url:'http://localhost:8081/article/' + nid + '/comment',
-            methods:'POST',
+            url: 'http://localhost:8081/article/' + nid + '/comment',
+            methods: 'POST',
             data: JSON.stringify({
-              username: 'this.$store.state.username',
-              content: 'this.toAdd'
+              username: this.$store.state.username,
+              content: this.toAdd
             }),
-            responseType:'json'
+            responseType: 'json'
           }).then(function (response) {
             that.article.comments.push({
               user: this.$store.state.username,
               article_id: this.$route.params.id,
-              date: "2019-12-2",
+              date: '2019-12-2',
               content: this.toAdd
             })
             console.log(response.data)
             that.comments.push(response.data)
           })
         }
-        
-      }
-      else {
+      } else {
         this.$router.push('/login')
       }
     }
@@ -112,14 +108,14 @@ export default {
 .author {
   height: 20px;
   float: left;
-  margin-left: 20px; 
+  margin-left: 20px;
   line-height: 20px;
   color:#909399;
 }
 .date {
   height: 20px;
   float: left;
-  margin-left: 25px; 
+  margin-left: 25px;
   line-height: 20px;
   color:#C0C4CC;
 }

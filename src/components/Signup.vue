@@ -36,65 +36,65 @@ export default {
       userID: '',
       password: '',
       passwordConfirm: '',
-      mail:'',
-      userinfo:'',
-      pswdinfo1:'',
-      pswdinfo2:'',
-      emailinfo:'',
+      mail: '',
+      userinfo: '',
+      pswdinfo1: '',
+      pswdinfo2: '',
+      emailinfo: ''
     }
   },
-  methods:{
-    clickJoin: function(){
+  methods: {
+    clickJoin: function () {
       var that = this
       this.$axios.request({
-       url: 'http://localhost:8081/user/register',
-       method: 'POST',
-       data:JSON.stringify({
-         username: 'this.userID',
-         password: 'this.password'
-       }),
-       responseType:'json'
-     }).then(function(response){
-       console.log(response.data)
-       if(!response.data.error) {
-         that.$store.commit('saveToken', {
-           username: that.userID,
-           token: response.data.token
-         })    
-       }
-       else{
-         alert(response.data.error) 
-       }
-       that.$router.push('/')
-       })
-      },
-      userValidateCheck:  function(){
-        if(!(/[0-9a-zA-Z_]{6,18}/.test(this.userID)))
-          this.userinfo = '用户名格式不正确'
-        else
-          this.userinfo = ''
-          
-      },
-      passwordCheck: function(){
-        if(!(/[0-9a-zA-Z]{6,18}/.test(this.password)))
-          this.pswdinfo1 = '密码格式不正确'
-        else
-          this.pswdinfo1=''
-      },
-      passwordValidateCheck: function(){
-        // alert('jajha')
-        if(this.password != this.passwordConfirm)
-          this.pswdinfo2='两次密码输入不相同'
-        else
-          this.pswdinfo2 = ''
-      },
-      mailValidateCheck: function(){
-        if(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})/.test(this.mail))
-          this.emailinfo = ''
-        else
-          this.emailinfo = '邮箱格式不正确'
-
+        url: 'http://localhost:8081/user/register',
+        method: 'POST',
+        data: JSON.stringify({
+          username: 'this.userID',
+          password: 'this.password'
+        }),
+        responseType: 'json'
+      }).then(function (response) {
+        console.log(response.data)
+        if (!response.data.error) {
+          that.$store.commit('saveToken', {
+            username: that.userID,
+            token: response.data.token
+          })
+          that.$router.push('/')
+        } else {
+          alert(response.data.error)
+        }
+      })
+    },
+    userValidateCheck: function () {
+      if (!(/[0-9a-zA-Z_]{6,18}/.test(this.userID))) {
+        this.userinfo = '用户名格式不正确'
+      } else {
+        this.userinfo = ''
       }
+    },
+    passwordCheck: function () {
+      if (!(/[0-9a-zA-Z]{6,18}/.test(this.password))) {
+        this.pswdinfo1 = '密码格式不正确'
+      } else {
+        this.pswdinfo1 = ''
+      }
+    },
+    passwordValidateCheck: function () {
+      if (this.password !== this.passwordConfirm) {
+        this.pswdinfo2 = '两次密码输入不相同'
+      } else {
+        this.pswdinfo2 = ''
+      }
+    },
+    mailValidateCheck: function () {
+      if (/^([A-Za-z0-9_])+([A-Za-z0-9_])+\.([A-Za-z]{2,4})/.test(this.mail)) {
+        this.emailinfo = ''
+      } else {
+        this.emailinfo = '邮箱格式不正确'
+      }
+    }
   }
 }
 </script>
