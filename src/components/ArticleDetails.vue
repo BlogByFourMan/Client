@@ -50,7 +50,8 @@ export default {
       var nid = this.$route.params.id// 获取id
       this.$axios.request({
         url: 'http://localhost:8081/article/' + nid,
-        methods: 'GET'
+        method: 'GET',
+        responseType: 'json'
       }).then(function (response) {
         console.log(response.data)
         that.article = response.data.ok
@@ -71,21 +72,23 @@ export default {
             data: JSON.stringify({
               User: that.$store.state.username,
               Article_id: parseInt(nid),
-              Token: that.$store.state.token,
               Date: '2019-12-6',
               Content: this.toAdd
             }),
+            headers: {
+              'Authorization': that.$store.state.token
+            },
             responseType: 'json'
           }).then(function (response) {
             console.log(response.data)
-            that.comments.push(response.data)
             if (!response.data.error) {
               that.article.comments.push({
-                user: that.$store.state.username,
-                article_id: that.$route.params.id,
-                date: '2019-12-2',
-                content: that.toAdd
+                user: response.data.ok.user,
+                article_id: response.data.ok.article_id,
+                date: response.data.ok.date,
+                content: response.data.ok.content
               })
+              that.toAdd = ''
             } else {
               alert(response.data.error)
             }

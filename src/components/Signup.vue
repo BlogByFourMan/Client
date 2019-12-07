@@ -56,10 +56,10 @@ export default {
         responseType: 'json'
       }).then(function (response) {
         console.log(response.data)
-        if (!response.data.error) {
+        if (response.data.ok) {
           that.$store.commit('saveToken', {
             username: that.userID,
-            token: response.data.token
+            token: response.data.ok
           })
           that.$router.push('/')
         } else {

@@ -44,7 +44,7 @@ export default {
         responseType: 'json'
       }).then(function (response) {
         console.log(response.data)
-        that.articlesList = response.data.ok
+        that.articlesList = response.data.ok.slice(1)
       })
     }
   }

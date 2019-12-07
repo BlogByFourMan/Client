@@ -42,7 +42,7 @@ export default {
         if (!response.data.error) {
           that.$store.commit('saveToken', {
             username: that.userID,
-            token: response.data.token
+            token: response.data.ok
           })
           that.$router.push('/')
         } else {
